@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情页</title>
+    <link rel="stylesheet" href="../css/qiangqing.css" >
+    <link rel="stylesheet" href="../css/base.css" >
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../lib/swiper.css">
+</head>
+<body>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../js/yh.js"></script>
+    <nav>
+        <main>
+            <p class="nav-1"> <span class="iconfont">&#xe607</span> <a style="color: black;" href="./yhindex.html">YOUHO!BUY</a>  有货</p>
+            <p class="nav-2"><span class="iconfont">&#xe70f</span>关于防诈骗的重要提醒</p>
+            <p class="nav-3">Hi~[<a href="#" id="dl">请登录</a>][<a href="" id="zc">免费注册</a>]</p>
+            <ul>
+                <li>| &nbsp;<a href="#">My有货</a> <span class="iconfont">&#xe60b</span>&nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe618</span> <a href="#"> 我的订单</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe711</span> <a href="#"> 我的收藏</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont aa">&#xe667</span><a href="#"> 消息</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe614</span><a href="#"> 客户服务</a> &nbsp;</li>
+                <li class="yel">| &nbsp;<span class="iconfont">&#xe6ea</span><a href="#"> 关注有货</a>&nbsp;</li>
+                <li class="red">| &nbsp;<span class="iconfont">&#xe615</span><a href="#"> 手机版</a> &nbsp;</li>
+            </ul>
+        </main>
+    </nav>
+    <header>
+        <main class="f-1">
+            <h1>Yoho!BUY</h1>
+            <form action="" method="">
+                <input type="text" class="txt"  />
+                <input type="submit" class="search iconfont" value="&#xe637" />
+            </form>
+            <span class="he-gw iconfont ">&#xe6b8</span>
+        </main>
+    </header>
+    <section>
+        <main>
+            <ul>
+                <li><a href="#">新品到来</a></li>
+                <li><a href="#">品牌一览</a></li>
+                <li><a href="#">服饰</a></li>
+                <li><a href="#">鞋履</a></li>
+                <li><a href="#">包袋</a></li>
+                <li><a href="#">配饰·其他</a></li>
+                <li><a href="#">SALE</a></li>
+                <li><a href="#">证照/协议</a></li>
+            </ul>
+        </main>
+    </section>
+    <article>
+        <main class="ar-m">
+            <p class="shy">首页 &gt; 上衣 &gt; 棉衣 &gt; THETHING 满印宽松贴标棉服</p>
+        <div class="ar-1">
+            <div class="ar-i">
+                <img class="show" src="../images/image1 (27).jpg" alt="">
+                <img class="show" src="../images/image1 (46).jpg" alt="">
+                <img class="show" src="../images/image1 (44).jpg" alt="">
+            </div>
+            
+            <img class="on" src="../images/image1 (26).jpg" alt="">
+            <img class="on" src="../images/image1 (39).jpg" alt="">
+            <img class="on" src="../images/image1 (9).jpg" alt="">
+        </div>
+        <div class="ar-2">
+            <h3>THETHING 满印宽松贴标棉服</h3>
+            <p class="diaop">吊牌价： <span>¥1198</span> 登录后即可查看vip价格 <i>立即登录</i>
+            </p>
+            <div class="ar-d1">
+                <h3 style="display: none;">123456</h3>
+                <p>颜色: <span>白色</span></p>
+                <p>尺码: <span>M</span><span>L</span></p>
+                <p>数量:
+                    <input class="ar-n" type="number" value="1">
+                    
+                </p>
+                <input class="ar-gw" type="button" value="加入购物车">
+                <input class="ar-sc" type="button" value="查看购物车">
+                <p class="ar-p2">服务说明: &nbsp;品牌保障  &nbsp;支持7天退换货 &nbsp;更多</p>
+                <div>
+                    <img src="../images/image1(50).png" alt="">
+                </div>
+            </div>
+        </div>
+        </main>
+    </article>
+    <script>
+        $('.on').mouseenter(function(){
+            $('.show').eq($(this).index()-1). css('display','block').siblings().css('display','none')
+        })
+
+
+        $('.ar-gw').click(function(){
+            $.ajax({
+                url:'../interface/addwq.php',
+                data:{
+                    id:'123457',
+                    name:'鞋子',
+                    price:1299,
+                    img:'../images/01.jpg',
+                    num:$('.ar-n').val()
+                },
+                success:function(res){
+                    // if(res.code){
+                    //     alert('商品加入成功')
+                    // }
+                    console.log(res);
+                },
+                dataType:'json'
+            })
+        })
+        $('.ar-sc').click(function(){
+            location.href='./cart.html'
+        })
+    </script>
+    <aside>
+        <main class="as-m">
+            <p class="as-title">商品信息</p>
+            <ul>
+                <li>编号: 52294526</li>
+                <li>颜　　色: 白色</li>
+                <li>性　　别: 男款</li>
+                <li>经典款型: 户外款</li>
+                <li>衣　　长: 适中</li>
+                <li>袖　　长: 长袖</li>
+                <li>版　　型: 正　常</li>
+                <li>厚　　度: 适中</li>
+                
+            </ul>
+            <div class="as-d1">
+                <ul>
+                    <li>
+                        <span>弹性:</span>
+                        <span>小</span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span class="kb"></span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span>大</span>
+                    </li>
+                    <li>
+                        <span>厚度:</span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span class="kb"></span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span>厚</span>
+                    </li>
+                    <li>
+                        <span>柔软度</span>
+                        <span>软</span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span class="kb"></span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span>硬</span>
+                    </li>
+                    <li>
+                        <span>透气性</span>
+                        <span>弱</span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span class="kb"></span>
+                        <span class="ks"></span>
+                        <span class="ks"></span>
+                        <span>强</span>
+                    </li>
+                    
+                </ul>
+            </div>
+            <p class="as-title">材质洗涤</p>
+            <div class="as-d2">
+                <img src="../images/image1 (35).jpg" alt="">
+                <span>纯棉</span>
+                <p>用各种洗涤剂，可手洗机洗，但不宜氯漂，宜阴干，避免曝晒，以免深色衣物褪色，在日光下晾晒时，将里面朝外。浸泡时间不能太长，避免褪色，深色与浅色衣服最好请分开洗涤，避免染色。棉质商品一般易皱、易缩水、易变形购买时请注意。</p>
+            </div>
+            <p class="as-p2"> 温馨提示：因产品工艺不同，洗涤方式请以吊牌信息为准</p>
+            <p class="as-title">商品详情</p>
+            <div class="as-d3">
+                <img src="../images/image1 (37).jpg" alt="">
+                <img src="../images/image1 (43).jpg" alt="">
+                <img src="../images/image1 (31).jpg" alt="">
+                <img src="../images/image1 (29).jpg" alt="">
+                <img src="../images/image1 (34).jpg" alt="">
+                <img src="../images/image1 (44).jpg" alt="">
+                <img src="../images/image1 (46).jpg" alt="">
+                <img src="../images/image1 (32).jpg" alt="">
+                <img src="../images/image1 (21).jpg" alt="">
+                <img src="../images/image1 (40).jpg" alt="">
+                <img src="../images/image1 (41).jpg" alt="">
+                <img src="../images/image1 (19).jpg" 
+                alt="">
+                <img src="../images/image1 (23).jpg" alt="">
+                <img src="../images/image1 (16).jpg" alt="">
+                
+            </div>
+            <p class="as-title">商品咨询</p>
+        </main>
+    </aside>
+    <footer>
+        <main>
+            <div class="ft-h">
+                <p><span class="iconfont">&#xe722</span><i>100%</i>品牌正品</p>
+                <p><span class="iconfont">&#xe691</span><i>7天</i>无理由退换</p>
+                <p><span class="iconfont">&#xe6ea</span><i>便捷</i>在线服务</p>
+            </div>
+            <div class="ft-v">
+                <ul>
+                    <li>新手专区</li>
+                    <li>注册登录</li>
+                    <li>购物结算</li>
+                    <li>下单支付</li>
+                    <li>收货评价</li>
+                </ul>
+                <ul>
+                    <li>会员中心</li>
+                    <li>会员制度</li>
+                    <li>会员优惠</li>
+                    <li>账户管理</li>
+                    <li>密码管理</li>
+                </ul>
+                <ul>
+                    <li>购物指南</li>
+                    <li>发票</li>
+                    <li>尺寸对照</li>
+                    <li>尺寸解读</li>
+                    <li>商品咨询</li>
+                </ul>
+                <ul>
+                    <li>支付方式</li>
+                    <li>在线支付</li>
+                    <li>货到付款</li>
+                    <li>分期支付</li>
+                    <li>优惠券丶有货币</li>
+                </ul>
+                <ul>
+                    <li>配送方式</li>
+                    <li>配送说明</li>
+                    <li>运费说明</li>
+                    <li>验货签收</li>
+                    <li>收货样品</li>
+                </ul>
+                <ul>
+                    <li>售后服务</li>
+                    <li>退换货政策</li>
+                    <li>退换货流程</li>
+                    <li>投诉于建议</li>
+                    <li>在线客服</li>
+                </ul>
+                <ul class="p0">
+                    <li>app常见问题</li>
+                    <li>Iphone版</li>
+                    <li>Androd版</li>
+                    <li>WAP版</li>
+                    <li>IPAD版</li>
+                </ul>
+            </div>
+            <div class="ft-l">
+                <div class="img-1">
+                    <img src="../images/isc2.png" alt="">
+                    <img src="../images/credit-flag3.png" alt="">
+                    <img src="../images/isc2.png" alt="">
+                </div>
+                <a href="#" class="a-1">返回首页 &nbsp;&nbsp;|&nbsp;&nbsp; YOHO!BUY 有货 &nbsp;&nbsp;|&nbsp;&nbsp; 新力传媒 &nbsp;&nbsp;|&nbsp;&nbsp; 联系我们 &nbsp;&nbsp;|&nbsp;&nbsp; 商家入驻 &nbsp;&nbsp;|&nbsp;&nbsp; 隐私条款 &nbsp;&nbsp;|&nbsp;&nbsp; 友情链接 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流品牌大全 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流品类大全 &nbsp;&nbsp;|<br/>潮流产品大全 &nbsp;&nbsp;| 潮流资讯 &nbsp;&nbsp;| &nbsp;&nbsp;穿衣搭配(男生版) &nbsp;&nbsp;|&nbsp;&nbsp; 穿衣搭配(女生版) &nbsp;&nbsp;|&nbsp;&nbsp; 潮流人气 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流潮品 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流视频 &nbsp;&nbsp;|<br/><span class="iconfont">&#xe69b</span> 苏公网安备 32010502010132号 &nbsp;&nbsp;|&nbsp;&nbsp; 出版物经营许可证 &nbsp;&nbsp;|&nbsp;&nbsp; 苏B2-20120395 &nbsp;&nbsp;|&nbsp;&nbsp; 食品经营许可证</a>
+            </div>
+            <p class="p-1">CopyRight © 2007-2020 南京新与力文化传播有限公司 苏ICP备09011225号 NewPower Co. 版权所有 江苏省南京市建邺区嘉陵江东街18号南京国家广告产业园5栋17，18楼 025-87781000</p>
+            <p class="ft-q">友情连接 : 
+                <a href="">中国品牌网</a>
+                <a href="">品牌加盟项目</a>
+                <a href="">鲜花</a>
+            </p>
+        </main>
+    </footer>
+</body>
+</html>

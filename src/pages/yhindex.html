@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/youhuo.css" >
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../lib/swiper.css">
+    
+</head>
+<body>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../js/yh.js"></script>
+    <script src="../js/waterfall.js"></script>
+    
+    
+    
+    <nav>
+        <main>
+            <p class="nav-1"> <span class="iconfont">&#xe607</span> YOUHO!BUY  有货</p>
+            <p class="nav-2"><span class="iconfont">&#xe70f</span>关于防诈骗的重要提醒</p>
+            <p class="nav-3">Hi~[<a href="#" id="dl">请登录</a>][<a href="#" id="zc">免费注册</a>]</p>
+            <form class="d-zc" action="../php/register.php" method="POST">
+            
+                <ul>
+                    <li>
+                        <h3>注册账号</h3>
+                        <span class="clo">X</span>
+                    </li>
+                    <li>   
+                    <input type="text" placeholder="请输入账号" name="username" class="li-zh">
+                    </li>
+                   
+                    <li>
+                        <input type="password" placeholder="设置密码" name="password" class="li-mm">
+                    </li>
+                    <!-- <li>
+                        <input type="text" placeholder="潮牌口令:非必填" class="li-kl">
+                    </li> -->
+                    <li>
+                        <a href="#">注册即表示您已阅读并同意</a>
+                    </li>
+                    <li>
+                        <a href="">有货用户服务协议 有货隐私条款</a>
+                    </li>
+                    <li>
+                        <input type="submit" value="立即注册"  class="li-zc">
+                    </li>
+                    <li>我已注册YOHO!BUY 有货账号 <a href="#">快速登录</a></li>
+                </ul>
+            
+        </form>
+            <form action="../php/login.php" method="GET">
+                <div class="d-dl">
+                    <ul >
+                        <li>
+                            <h3>账号登录</h3>
+                            <span class="clos">X</span>
+                            
+                        </li>
+                        <li>
+                            <input type="text" placeholder="手机号码" 
+                            name="username"
+                            class="dl-p">
+                        </li>
+                        
+                        <li>
+                            <input type="password" placeholder="密码" 
+                            name="password"
+                            class="dl-m">
+                        </li>
+                        <li>
+                            <input type="submit" value="登录" class="dl-d">
+                        </li>
+                        <li>
+                            <input type="checkbox">
+                            <a href="#">记住状态密码</a>
+                            <a href="#">忘记密码?</a>
+                            <a href="#">| 快速注册</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <script>
+                var zc=document.getElementById('zc')
+                var dl=document.getElementById('dl')
+                var divZ=document.getElementsByClassName('d-zc')[0]
+                var divD=document.getElementsByClassName('d-dl')[0]
+                var clo=document.getElementsByClassName('clo')[0]
+                var clos=document.getElementsByClassName('clos')[0]
+                zc.onclick=function(){
+                    divZ.style.display="block"
+                    divD.style.display="none"
+                }
+                dl.onclick=function(){
+                    divD.style.display="block"
+                    divZ.style.display="none"
+                }
+                clo.onclick=function(){
+                    divZ.style.display="none"
+                    
+                }
+                clos.onclick=function(){
+                    divD.style.display="none"
+                    
+                }
+            </script>
+            <ul class="nav-u">
+                <li>| &nbsp;<a href="#">My有货</a> <span class="iconfont">&#xe60b</span>&nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe618</span> <a href="#"> 我的订单</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe711</span> <a href="#"> 我的收藏</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont aa">&#xe667</span><a href="#"> 消息</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe614</span><a href="#"> 客户服务</a> &nbsp;</li>
+                <li class="yel">| &nbsp;<span class="iconfont">&#xe6ea</span><a href="#"> 关注有货</a>&nbsp;</li>
+                <li class="red">| &nbsp;<span class="iconfont">&#xe615</span><a href="#"> 手机版</a> &nbsp;</li>
+            </ul>
+        </main>
+    </nav>
+    
+    <header>
+        <main class="f-1">
+            <h1>Yoho!BUY</h1>
+            <form action="" method="">
+                <input type="text" class="txt"  />
+                <input type="submit" class="search iconfont" value="&#xe637" />
+            </form>
+            <span class="he-gw iconfont "><a href="./cart.html">&#xe6b8</a></span>
+        </main>
+    </header>
+    <section>
+        <main>
+            <ul>
+                <li><a href="#">新品到来</a></li>
+                <li><a href="#">品牌一览</a></li>
+                <li class="fs"><a href="#">服饰</a>
+                    <ul id="list">
+                        
+                    </ul>
+                </li>
+                <li><a href="#">鞋履</a>
+                    
+                </li>
+                <li><a href="#">包袋</a></li>
+                <li><a href="#">配饰·其他</a></li>
+                <li><a href="#">SALE</a></li>
+                <li><a href="#">证照/协议</a></li>
+            </ul>
+        </main>
+    </section>
+    <script>
+        $.ajax({
+        url:'../json/menu.json',
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+            $.each(data,function(i,item){
+                $('#list').append(`<li><a href="#">${item.text}</a></li>`)
+            })
+        }
+        
+    })
+       
+        var li=$('.fs')[0]
+        var ul=$('#list')[0]
+        li.onmouseenter=function(){
+            ul.style.display="block"
+        }
+        li.onmouseleave=function(){
+            ul.style.display="none"
+        }
+
+
+
+
+        </script>
+    <article>
+        <main class="ar-q">
+            <div class="swiper-container box">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="../images/0176a0daaf7acff390f9e2c1d761bf9d80.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="../images/010bf036a8d18a55c8a536bf2dc53f14d7.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="../images/017220e49c271f8ffbd9fde5ef37ba1f26.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="../images/010ffcfcabefff7a8cfda21ca090cb1cb2.jpg" alt=""></div>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+                
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                
+                <!-- 如果需要滚动条 -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+
+            <div class="ms">
+                <i>v 抢购&nbsp;&nbsp;</i>
+                <i>距离结束</i>
+                <span class="ms-d"></span><i>天</i>
+                <span class="ms-d"></span><i>小时</i>
+                <span class="ms-d"></span><i>分钟</i>
+                <span class="ms-d"></span><i>秒</i>
+            </div>
+            <script>
+                djs()
+                timer=setInterval(function(){
+                    djs()
+                },1000)
+                
+            </script>
+            <script src="../lib/swiper.js"></script>
+            <script>        
+                var mySwiper = new Swiper ('.swiper-container', {
+                //   direction: 'vertical', // 垂直切换选项
+                loop: true, // 循环模式选项
+                autoplay:true,
+                
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                
+                // 如果需要前进后退按钮
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                
+                // 如果需要滚动条
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                },
+                })        
+            </script>
+            <p class="ar-title">人气单品</p>
+            
+            <div class="ar-img1">
+                <a href="./qiangqing.html"><img class="addw" src="../images/imageqq.png" alt=""></a>
+                <img class="addq" src="../images/0190c3c7d66846f1da88035b7b166b9654.jpg" alt="">
+                <img  class="addw" src="../images/0187e6bff0589d47be8927297861b5b06e.jpg" alt="">
+                <img  class="addw" src="../images/01ba129add4fce6ed7d55b2ae9de660891.jpg" alt="">
+                <img  class="addw" src="../images/017ab69a5aa583027bea627cb521665183.jpg" alt="">
+                <img  class="addw" src="../images/01916a3885be241dee330f5e813b15a421.jpg" alt="">
+                <img class="addw" src="../images/01.jpg" alt="">
+                <img class="addw" src="../images/012eaa1ceb8772d28e214330dfb5e041b0.jpg" alt="">
+                <img class="addw" src="../images/01f50572bf142d5f4b29d728f353a95b76.jpg" alt="">
+                <img class="addq" src="../images/0169431db00fc5d117778b977d136e4dde.jpg" alt="">
+
+            </div>
+            <p class="ar-title">优选品牌</p>
+
+            <div class="ar-img1">
+                <img class="addw" src="../images/01d04299b229b61d08a891df1de766495f.jpg" alt="">
+                <img class="addq" src="../images/0190c3c7d66846f1da88035b7b166b9654.jpg" alt="">
+                <img  class="addw" src="../images/0187e6bff0589d47be8927297861b5b06e.jpg" alt="">
+                <img  class="addw" src="../images/01ba129add4fce6ed7d55b2ae9de660891.jpg" alt="">
+                <img  class="addw" src="../images/017ab69a5aa583027bea627cb521665183.jpg" alt="">
+                <img  class="addw" src="../images/01916a3885be241dee330f5e813b15a421.jpg" alt="">
+                <img class="addw" src="../images/01d916ad10bea95bbf2130b2c44025bdee.jpg" alt="">
+                <img class="addw" src="../images/012eaa1ceb8772d28e214330dfb5e041b0.jpg" alt="">
+                <img class="addw" src="../images/01f50572bf142d5f4b29d728f353a95b76.jpg" alt="">
+                <img class="addq" src="../images/0169431db00fc5d117778b977d136e4dde.jpg" alt="">
+
+            </div>
+            <p class="ar-title">新品上架</p>
+
+            <div class="ar-img1">
+                <img class="addw" src="../images/01d04299b229b61d08a891df1de766495f.jpg" alt="">
+                <img class="addq" src="../images/0190c3c7d66846f1da88035b7b166b9654.jpg" alt="">
+                <img  class="addw" src="../images/0187e6bff0589d47be8927297861b5b06e.jpg" alt="">
+                <img  class="addw" src="../images/01ba129add4fce6ed7d55b2ae9de660891.jpg" alt="">
+                <img  class="addw" src="../images/017ab69a5aa583027bea627cb521665183.jpg" alt="">
+                <img  class="addw" src="../images/01916a3885be241dee330f5e813b15a421.jpg" alt="">
+                <img class="addw" src="../images/01d916ad10bea95bbf2130b2c44025bdee.jpg" alt="">
+                <img class="addw" src="../images/012eaa1ceb8772d28e214330dfb5e041b0.jpg" alt="">
+                <img class="addw" src="../images/01f50572bf142d5f4b29d728f353a95b76.jpg" alt="">
+                <img class="addq" src="../images/0169431db00fc5d117778b977d136e4dde.jpg" alt="">
+
+            </div>
+            <p class="ar-title">潮流时装</p>
+
+            <div class="ar-img1">
+                <img class="addw" src="../images/01d04299b229b61d08a891df1de766495f.jpg" alt="">
+                <img class="addq" src="../images/0190c3c7d66846f1da88035b7b166b9654.jpg" alt="">
+                <img  class="addw" src="../images/0187e6bff0589d47be8927297861b5b06e.jpg" alt="">
+                <img  class="addw" src="../images/01ba129add4fce6ed7d55b2ae9de660891.jpg" alt="">
+                <img  class="addw" src="../images/017ab69a5aa583027bea627cb521665183.jpg" alt="">
+                <img  class="addw" src="../images/01916a3885be241dee330f5e813b15a421.jpg" alt="">
+                <img class="addw" src="../images/01d916ad10bea95bbf2130b2c44025bdee.jpg" alt="">
+                <img class="addw" src="../images/012eaa1ceb8772d28e214330dfb5e041b0.jpg" alt="">
+                <img class="addw" src="../images/01f50572bf142d5f4b29d728f353a95b76.jpg" alt="">
+                <img class="addq" src="../images/0169431db00fc5d117778b977d136e4dde.jpg" alt="">
+
+            </div>
+            <p class="ar-title">优选品牌</p>
+        </main>
+    </article>
+    <footer>
+        <main>
+            <div class="ft-h">
+                <p><span class="iconfont">&#xe722</span><i>100%</i>品牌正品</p>
+                <p><span class="iconfont">&#xe691</span><i>7天</i>无理由退换</p>
+                <p><span class="iconfont">&#xe6ea</span><i>便捷</i>在线服务</p>
+            </div>
+            <div class="ft-v">
+                <ul>
+                    <li>新手专区</li>
+                    <li>注册登录</li>
+                    <li>购物结算</li>
+                    <li>下单支付</li>
+                    <li>收货评价</li>
+                </ul>
+                <ul>
+                    <li>会员中心</li>
+                    <li>会员制度</li>
+                    <li>会员优惠</li>
+                    <li>账户管理</li>
+                    <li>密码管理</li>
+                </ul>
+                <ul>
+                    <li>购物指南</li>
+                    <li>发票</li>
+                    <li>尺寸对照</li>
+                    <li>尺寸解读</li>
+                    <li>商品咨询</li>
+                </ul>
+                <ul>
+                    <li>支付方式</li>
+                    <li>在线支付</li>
+                    <li>货到付款</li>
+                    <li>分期支付</li>
+                    <li>优惠券丶有货币</li>
+                </ul>
+                <ul>
+                    <li>配送方式</li>
+                    <li>配送说明</li>
+                    <li>运费说明</li>
+                    <li>验货签收</li>
+                    <li>收货样品</li>
+                </ul>
+                <ul>
+                    <li>售后服务</li>
+                    <li>退换货政策</li>
+                    <li>退换货流程</li>
+                    <li>投诉于建议</li>
+                    <li>在线客服</li>
+                </ul>
+                <ul class="p0">
+                    <li>app常见问题</li>
+                    <li>Iphone版</li>
+                    <li>Androd版</li>
+                    <li>WAP版</li>
+                    <li>IPAD版</li>
+                </ul>
+            </div>
+            <div class="ft-l">
+                <div class="img-1">
+                    <img src="../images/isc2.png" alt="">
+                    <img src="../images/credit-flag3.png" alt="">
+                    <img src="../images/isc2.png" alt="">
+                </div>
+                <a href="#" class="a-1">返回首页 &nbsp;&nbsp;|&nbsp;&nbsp; YOHO!BUY 有货 &nbsp;&nbsp;|&nbsp;&nbsp; 新力传媒 &nbsp;&nbsp;|&nbsp;&nbsp; 联系我们 &nbsp;&nbsp;|&nbsp;&nbsp; 商家入驻 &nbsp;&nbsp;|&nbsp;&nbsp; 隐私条款 &nbsp;&nbsp;|&nbsp;&nbsp; 友情链接 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流品牌大全 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流品类大全 &nbsp;&nbsp;|<br/>潮流产品大全 &nbsp;&nbsp;| 潮流资讯 &nbsp;&nbsp;| &nbsp;&nbsp;穿衣搭配(男生版) &nbsp;&nbsp;|&nbsp;&nbsp; 穿衣搭配(女生版) &nbsp;&nbsp;|&nbsp;&nbsp; 潮流人气 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流潮品 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流视频 &nbsp;&nbsp;|<br/><span class="iconfont">&#xe69b</span> 苏公网安备 32010502010132号 &nbsp;&nbsp;|&nbsp;&nbsp; 出版物经营许可证 &nbsp;&nbsp;|&nbsp;&nbsp; 苏B2-20120395 &nbsp;&nbsp;|&nbsp;&nbsp; 食品经营许可证</a>
+            </div>
+            <p class="p-1">CopyRight © 2007-2020 南京新与力文化传播有限公司 苏ICP备09011225号 NewPower Co. 版权所有 江苏省南京市建邺区嘉陵江东街18号南京国家广告产业园5栋17，18楼 025-87781000</p>
+            <p class="ft-q">友情连接 : 
+                <a href="">中国品牌网</a>
+                <a href="">品牌加盟项目</a>
+                <a href="">鲜花</a>
+            </p>
+        </main>
+    </footer>
+    <script>
+        var imgArr=document.getElementsByTagName('img')
+        // console.log(imgArr);
+        for(var i=0;i<imgArr.length;i++){
+            imgArr[i].onmouseenter=function(){
+                this.style.border="solid 1px #999"
+                
+            }
+            imgArr[i].onmouseleave=function(){
+                this.style.border="none"
+                
+            }
+        }
+    </script>
+    
+</body>
+</html>

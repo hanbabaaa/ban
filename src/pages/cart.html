@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <link rel="stylesheet" href="../css/cart.css" >
+    <link rel="stylesheet" href="../css/base.css" >
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../lib/swiper.css">
+</head>
+<body>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../js/yh.js"></script>
+    <nav>
+        <main>
+            <p class="nav-1"> <span class="iconfont">&#xe607</span> <a style="color: black;" href="./yhindex.html">YOUHO!BUY</a>  有货</p>
+            <p class="nav-2"><span class="iconfont">&#xe70f</span>关于防诈骗的重要提醒</p>
+            <p class="nav-3">Hi~[<a href="#" id="dl">请登录</a>][<a href="" id="zc">免费注册</a>]</p>
+            <ul>
+                <li>| &nbsp;<a href="#">My有货</a> <span class="iconfont">&#xe60b</span>&nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe618</span> <a href="#"> 我的订单</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe711</span> <a href="#"> 我的收藏</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont aa">&#xe667</span><a href="#"> 消息</a> &nbsp;</li>
+                <li>| &nbsp;<span class="iconfont">&#xe614</span><a href="#"> 客户服务</a> &nbsp;</li>
+                <li class="yel">| &nbsp;<span class="iconfont">&#xe6ea</span><a href="#"> 关注有货</a>&nbsp;</li>
+                <li class="red">| &nbsp;<span class="iconfont">&#xe615</span><a href="#"> 手机版</a> &nbsp;</li>
+            </ul>
+        </main>
+    </nav>
+    <header>
+        <main class="f-1">
+            <h1>Yoho!BUY</h1>
+            <form action="" method="">
+                <input type="text" class="txt"  />
+                <input type="submit" class="search iconfont" value="&#xe637" />
+            </form>
+            <span class="he-gw iconfont ">&#xe6b8</span>
+        </main>
+    </header>
+    <section>
+        <main>
+            <ul>
+                <li><a href="#">新品到来</a></li>
+                <li><a href="#">品牌一览</a></li>
+                <li><a href="#">服饰</a></li>
+                <li><a href="#">鞋履</a></li>
+                <li><a href="#">包袋</a></li>
+                <li><a href="#">配饰·其他</a></li>
+                <li><a href="#">SALE</a></li>
+                <li><a href="#">证照/协议</a></li>
+            </ul>
+        </main>
+    </section>
+    <article>
+        <main>
+        <table>
+            <thead>
+                <th>名称</th>
+                <th>图片</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <div class="dh">
+            没有更多商品了
+        </div>
+        </main>
+    </article>
+    <script>
+        showTbody();
+function showTbody(){
+$.ajax({
+url:'../interface/showlist.php',
+success:function(res){
+    if(res.code){
+        var arr = res.data;
+        if(res.data){
+            //如果有商品,table显示,div隐藏
+            $('table').show();
+            $('.dh').hide();
+            //在table里面展示商品信息
+            $('tbody').empty();
+            $.each(arr,function(index,item){
+                $('tbody').append(`<tr id="${item.product_id}">
+                    <td>${item.product_name}</td>
+                    <td>
+                        <img src="${item.product_img}" alt="">
+                    </td>
+                    <td>${item.product_price}</td>
+                    <td>
+                        <span class='add'>+</span>
+                        <span>${item.product_num}</span>
+                        <span class="jian">-</span>
+                    </td>
+                    <td class="del">删除</td>
+                </tr>`)
+            })
+        }              
+
+        
+    }else{
+        //如果没有商品,table隐藏,div显示
+        $('table').hide();
+        $('.dh').show();                       
+    } 
+},
+dataType:'json',
+cache:false
+})
+}
+
+// 点击+增加一个商品数量,点击-减少一个商品数量
+$('tbody').click(function(e){
+var target = e.target;
+// target是一个dom节点
+if((target.className=='add')||(target.className=='jian')){
+// 点击+增加一个商品数量,点击-减少一个商品数量
+$.ajax({
+    url:'../interface/updatewq.php',
+    data:{
+        type:target.className,
+        id:$(target).parents('tr').attr('id')
+    },
+    success:function(res){
+        if(res.code){
+            showTbody()
+        }
+    },
+    dataType:'json'
+})
+
+            }else if(target.className=='del'){
+                // 点击删除按钮删除一个商品
+                $.ajax({
+                    url:'../interface/delwq.php',
+                    data:{
+                        id:$(target).parents('tr').attr('id')
+                    },
+                    success:function(res){
+                        if(res.code){
+                            showTbody()
+                        }
+                    },
+                    dataType:'json'
+                })
+            }
+        })
+    </script>
+    <footer>
+        <main>
+            <div class="ft-h">
+                <p><span class="iconfont">&#xe722</span><i>100%</i>品牌正品</p>
+                <p><span class="iconfont">&#xe691</span><i>7天</i>无理由退换</p>
+                <p><span class="iconfont">&#xe6ea</span><i>便捷</i>在线服务</p>
+            </div>
+            <div class="ft-v">
+                <ul>
+                    <li>新手专区</li>
+                    <li>注册登录</li>
+                    <li>购物结算</li>
+                    <li>下单支付</li>
+                    <li>收货评价</li>
+                </ul>
+                <ul>
+                    <li>会员中心</li>
+                    <li>会员制度</li>
+                    <li>会员优惠</li>
+                    <li>账户管理</li>
+                    <li>密码管理</li>
+                </ul>
+                <ul>
+                    <li>购物指南</li>
+                    <li>发票</li>
+                    <li>尺寸对照</li>
+                    <li>尺寸解读</li>
+                    <li>商品咨询</li>
+                </ul>
+                <ul>
+                    <li>支付方式</li>
+                    <li>在线支付</li>
+                    <li>货到付款</li>
+                    <li>分期支付</li>
+                    <li>优惠券丶有货币</li>
+                </ul>
+                <ul>
+                    <li>配送方式</li>
+                    <li>配送说明</li>
+                    <li>运费说明</li>
+                    <li>验货签收</li>
+                    <li>收货样品</li>
+                </ul>
+                <ul>
+                    <li>售后服务</li>
+                    <li>退换货政策</li>
+                    <li>退换货流程</li>
+                    <li>投诉于建议</li>
+                    <li>在线客服</li>
+                </ul>
+                <ul class="p0">
+                    <li>app常见问题</li>
+                    <li>Iphone版</li>
+                    <li>Androd版</li>
+                    <li>WAP版</li>
+                    <li>IPAD版</li>
+                </ul>
+            </div>
+            <div class="ft-l">
+                <div class="img-1">
+                    <img src="../images/isc2.png" alt="">
+                    <img src="../images/credit-flag3.png" alt="">
+                    <img src="../images/isc2.png" alt="">
+                </div>
+                <a href="#" class="a-1">返回首页 &nbsp;&nbsp;|&nbsp;&nbsp; YOHO!BUY 有货 &nbsp;&nbsp;|&nbsp;&nbsp; 新力传媒 &nbsp;&nbsp;|&nbsp;&nbsp; 联系我们 &nbsp;&nbsp;|&nbsp;&nbsp; 商家入驻 &nbsp;&nbsp;|&nbsp;&nbsp; 隐私条款 &nbsp;&nbsp;|&nbsp;&nbsp; 友情链接 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流品牌大全 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流品类大全 &nbsp;&nbsp;|<br/>潮流产品大全 &nbsp;&nbsp;| 潮流资讯 &nbsp;&nbsp;| &nbsp;&nbsp;穿衣搭配(男生版) &nbsp;&nbsp;|&nbsp;&nbsp; 穿衣搭配(女生版) &nbsp;&nbsp;|&nbsp;&nbsp; 潮流人气 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流潮品 &nbsp;&nbsp;|&nbsp;&nbsp; 潮流视频 &nbsp;&nbsp;|<br/><span class="iconfont">&#xe69b</span> 苏公网安备 32010502010132号 &nbsp;&nbsp;|&nbsp;&nbsp; 出版物经营许可证 &nbsp;&nbsp;|&nbsp;&nbsp; 苏B2-20120395 &nbsp;&nbsp;|&nbsp;&nbsp; 食品经营许可证</a>
+            </div>
+            <p class="p-1">CopyRight © 2007-2020 南京新与力文化传播有限公司 苏ICP备09011225号 NewPower Co. 版权所有 江苏省南京市建邺区嘉陵江东街18号南京国家广告产业园5栋17，18楼 025-87781000</p>
+            <p class="ft-q">友情连接 : 
+                <a href="">中国品牌网</a>
+                <a href="">品牌加盟项目</a>
+                <a href="">鲜花</a>
+            </p>
+        </main>
+    </footer>
+</body>
+</html>
+</body>
+</html>
